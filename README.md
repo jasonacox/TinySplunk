@@ -1,8 +1,8 @@
 # TinySplunk
 
-Tools and instructions to build and use a containerized version of Splunk for home
+TinySplunk is a collection of tools and instructions to build and use a Docker containerized version of Splunk for home or educational use.
 
-[Splunk](https://www.splunk.com) is a commercial enterprise product.  There is a [Splunk Free](https://www.splunk.com/en_us/download.html) version for personal, ad-hoc search and visualization of data. Splunk Free supports ongoing indexing of small volumes (<500MB/day) of data.  If you go over 500MB/day more than 3 times in a 30 day period, Splunk will continue to index your data, but search will be disabled until you are back down to 3 or fewer times in the 30 day period.
+What is Splunk? [Splunk](https://www.splunk.com) is a commercial enterprise product.  They have provided a [Splunk Free](https://www.splunk.com/en_us/download.html) version for personal use. The Splunk Free version supports ongoing indexing of small volumes (<500MB/day) of data.  As I understand it, if you go over 500MB/day more than 3 times in a 30 day period, Splunk will continue to index your data, but search will be disabled until you are back down to 3 or fewer times in the 30 day period. 
 
 ## Setup
 
