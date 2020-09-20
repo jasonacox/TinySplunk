@@ -13,9 +13,11 @@ I created a solar powered [WiFi Weather Station](https://github.com/jasonacox/We
 ### Splunk Query
 
 ```sql
-ourcetype=weather_station 
+sourcetype=weather_station 
 | eval TempF = ((temp*1.8)+32.0) 
-| timechart avg(TempF) as "Temp" avg(pressure) as "Pressure (hPa)" avg(humidity) as "Humidity (%)" avg(voltage) as "Voltage" avg(rain) as "Rain" avg(wind) as "Wind Speed"
+| timechart avg(TempF) as "Temp" avg(pressure) as "Pressure (hPa)" avg(humidity)
+  as "Humidity (%)" avg(voltage) as "Voltage" avg(rain) as "Rain" avg(wind) as
+  "Wind Speed"
 ```
 
 ### Splunk Dashboard
