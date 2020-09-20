@@ -78,7 +78,7 @@ If you want to send data or log files over from another systems, the Universal F
 
 ### HTTP Event Collector (HEC) - 8088
 
-You can send data to Splunk to be index via siple HTTP post commands.  This requires that you set up a Splunk HEC token for your scripts to use: 
+You can send data to Splunk via simple HTTP post commands.  This requires that you set up a Splunk HEC token for your scripts to use: 
 
 * Setup - In the Splunk console: Go to _Settings_ -> _Data Input_ -> _HTTP Event Collector_ -> "_New Token_" button.  Copy the token ID for use in your HEC scripts.
 * Examples - The following are example scripts you can use to send event data to Splunk via HEC:
@@ -90,7 +90,7 @@ You can send data to Splunk to be index via siple HTTP post commands.  This requ
         -d '{"event":"hello world", "sourcetype": "manual"}'
     ```
 
-* Python Modules - There are several python modules to help with sending events via HEC. This example uses http_event_collector:
+* Python Modules - There are several python modules to help with sending events via HEC. This example uses Splunk-HEC (splunk_http_event_collector):
 
     ```bash
     # Install python module from PyPI
@@ -116,7 +116,7 @@ You can send data to Splunk to be index via siple HTTP post commands.  This requ
     splunk = http_event_collector(HECKEY, HECHOST)
 
     # Build payload with metadata information
-    event = '{"message":"hello world", "index": 255, "acolor": "black", "attribute":"lives", "declare":"matter"}'
+    event = '{"index": 255, "acolor": "black", "attribute":"lives", "declare":"matter"}'
     payload = {}
     payload.update({"index":"main"})
     payload.update({"sourcetype":"sender-json"})
@@ -130,7 +130,7 @@ You can send data to Splunk to be index via siple HTTP post commands.  This requ
     ```
 
     Helpful tools for sending HEC messages:
-    * [tools/HEC-JSON-Sender.py] - Send JSON file as event
+    * [HEC-JSON-Sender.py](tools/HEC-JSON-Sender.py) - Send JSON file as event
 
 ### Splunk Management API - 8089
 

@@ -10,6 +10,6 @@ You can send data to Splunk to be index via siple HTTP post commands.  This requ
 
 ### HEC-JSON-Sender.py
 
-The [HEC-JSON-Sender.py] script reads a JSON file and send that as an event payload to the Splunk HEC endpoint.
+The [HEC-JSON-Sender.py](HEC-JSON-Sender.py) script reads a JSON file and send that as an event payload to the Splunk HEC endpoint.
 
-* Edit the [HEC-JSON-Sender.py] file with the correct server and metadata settings.
+* Edit the [HEC-JSON-Sender.py](HEC-JSON-Sender.py) file with the correct server and metadata settings.
