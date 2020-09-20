@@ -173,8 +173,8 @@ You can send data to Splunk to be index via siple HTTP post commands.  This requ
 
 You can even send data to Splunk through the port 8089 REST API via Splunk SDKs.  Note, this only works on the full Splunk Enterprise version (Trial or Licensed) with User and Authentication features enabled.  This is not available in the Splunk Free version.
 
-    * The [Splunk SDK for Python](https://dev.splunk.com/enterprise/docs/devtools/python/sdk-python/) includes a client module that makes it easy to send data via the Splunk Management API port.
-    * Example Usage and Scripts:
+* The [Splunk SDK for Python](https://dev.splunk.com/enterprise/docs/devtools/python/sdk-python/) includes a client module that makes it easy to send data via the Splunk Management API port.
+* Example Usage and Scripts:
 
     ```bash
     # Install Python SDK
