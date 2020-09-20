@@ -2,11 +2,11 @@
 
 TinySplunk is a collection of tools and instructions to build and use a Docker containerized version of Splunk for home or educational use.
 
-What is Splunk? [Splunk](https://www.splunk.com) is a commercial enterprise product.  They have provided a [Splunk Free](https://www.splunk.com/en_us/download.html) version for personal use. The Splunk Free version supports ongoing indexing of small volumes (<500MB/day) of data.  As I understand it, if you go over 500MB/day more than 3 times in a 30 day period, Splunk will continue to index your data, but search will be disabled until you are back down to 3 or fewer times in the 30 day period. 
+What is Splunk? [Splunk](https://www.splunk.com) is a commercial enterprise product.  They have provided a [Splunk Free](https://www.splunk.com/en_us/download.html) version for personal use. The Splunk Free version supports ongoing indexing of small volumes (<500MB/day).  As I understand it, if you go over 500MB/day more than 3 times in a 30 day period, Splunk will continue to index your data, but search will be disabled until you are back down to 3 or fewer times in the 30 day period. 
 
 ## Setup
 
-This setup assumes a Linux host with docker installed.  
+This setup assumes you are using a Linux host with docker installed.  
 
 ```bash
 # Create splunk user and home directory
@@ -44,8 +44,8 @@ The `setup.sh` script pulls down the latest splunk container from docker hub.
 
 * The script will mount the *var* and *etc* folder to local directories to allow configuration and data persistence.
 
-    - /home/splunk/var:/opt/splunk/var \
-    - /home/splunk/etc:/opt/splunk/etc \
+    - /home/splunk/var (external) maps to /opt/splunk/var (container)
+    - /home/splunk/etc (external) maps to /opt/splunk/etc (container)
 
 * The script set up port forwarding for the following:
 
@@ -59,10 +59,10 @@ The `setup.sh` script pulls down the latest splunk container from docker hub.
 
 The following commands are included in this repo:
 
-* start - This will start the container
-* status - This will provide the status of the container
-* logs - This will display the logs from the container
-* upgrade - This will upgrade the container
+* **start** - This will start the container
+* **status** - This will provide the status of the container
+* **logs** - This will display the logs from the container
+* **upgrade** - This will upgrade the container
 
 ## Get Data 
 
