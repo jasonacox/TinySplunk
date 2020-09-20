@@ -1,8 +1,10 @@
 # TinySplunk
 
-TinySplunk is a collection of tools and instructions to build and use a Docker containerized version of Splunk for home or educational use.
+TinySplunk is a collection of tools and instructions to build and use a Docker containerized version of Splunk for home and educational use.
 
-What is Splunk? [Splunk](https://www.splunk.com) is a commercial enterprise product.  They have provided a [Splunk Free](https://www.splunk.com/en_us/download.html) version for personal use. The Splunk Free version supports ongoing indexing of small volumes (<500MB/day).  As I understand it, if you go over 500MB/day more than 3 times in a 30 day period, Splunk will continue to index your data, but search will be disabled until you are back down to 3 or fewer times in the 30 day period. 
+What is Splunk? [Splunk](https://www.splunk.com) is a commercial software tool that provides a web-based way to search, monitor and analyze log and event data from computer systems and network devices.  It is a commercial product but they offer a [Splunk Free](https://www.splunk.com/en_us/download.html) version for personal use. The Splunk Free version supports indexing of small volumes (up to 500MB/day).  
+
+I created this repo to chronicle my journey in setting up a home-based Tiny Splunk (free) installation for education and home automation.  I'm including tips, instructions and tools I have found or built along the way. I welcome comments (issues) and pull requests!
 
 ## Setup
 
@@ -91,83 +93,44 @@ You can send data to Splunk to be index via siple HTTP post commands.  This requ
 * Python Modules - There are several python modules to help with sending events via HEC. This example uses http_event_collector:
 
     ```bash
-    # Install python module
+    # Install python module from PyPI
+    pip install Splunk-HEC
+
+    # Alternative installation from git - latest version
     pip install git+git://github.com/georgestarcher/Splunk-Class-httpevent.git
     ```
 
-    sender.py
     ```python
     #!/usr/bin/python
     #
-    # Data Recorder - Send to Splunk via HEC
+    # Event Recorder - Send to Splunk via HEC
     #
-
     from splunk_http_event_collector import http_event_collector
     import json
-    import logging
-    import sys
 
     # Configuration and Metadata Settings
-    HECKEY = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-    HECHOST = "localhost"
-    INDEX = "main"      # Main is default index - it must exist in Splunk to send
-    HOSTNAME = "sensor"
-    SOURCETYPE = "sender-json"
-    SOURCE = "http-stream"
+    HECKEY = "2bf54cc3-3469-4f3b-bc8c-056bb3dba5bc"
+    HECHOST = "10.0.1.26"
 
-    # Set up logging to get warning and errors.
-    logging.basicConfig(format='%(asctime)s %(name)s %(levelname)s %(message)s', datefmt='%Y-%m-%d %H:%M:%S %z')
+    # Setup Splunk HEC Connector
+    splunk = http_event_collector(HECKEY, HECHOST)
 
-    #
-    # Main Function
-    #
-    def main():
-        # Main program block
-        if(len(sys.argv) < 2):
-            print("Usage: sender.py <JSON-data-file>")
-            sys.exit(1)
+    # Build payload with metadata information
+    event = '{"message":"hello world", "index": 255, "acolor": "black", "attribute":"lives", "declare":"matter"}'
+    payload = {}
+    payload.update({"index":"main"})
+    payload.update({"sourcetype":"sender-json"})
+    payload.update({"source":"http-stream"})
+    payload.update({"host":"test"})
+    payload.update({"event":event})
 
-        sensor_file = sys.argv[1]
-
-        # Setup Splunk HEC Connector
-        splunk = http_event_collector(HECKEY, HECHOST)
-        splunk.log.setLevel(logging.ERROR)
-
-        # Perform a HEC endpoint reachable check
-        hec_reachable = splunk.check_connectivity()
-        if not hec_reachable:
-            print("ERROR: HEC endpoint unreachable.")
-            sys.exit(1)
-
-        # Read line of file and break apart JSON into event items
-        event = {}
-        try:
-            file = open(sensor_file,"r")
-            line = file.read().strip()
-            jsonobj = json.loads(line)
-            for k, v in jsonobj.items():
-                event.update({k:v})
-
-            # Build payload with metadata information
-            payload = {}
-            payload.update({"index":INDEX})
-            payload.update({"sourcetype":SOURCETYPE})
-            payload.update({"source":SOURCE})
-            payload.update({"host":HOSTNAME})
-            payload.update({"event":event})
-            # Send payload
-            splunk.sendEvent(payload)
-            splunk.flushBatch()
-        except:
-            print("ERROR: Unable to send %s" % SENSOR_FILE)
-
-    if __name__ == '__main__':
-
-        try:
-            main()
-        except KeyboardInterrupt:
-            pass
+    # Send payload
+    splunk.sendEvent(payload)
+    splunk.flushBatch()
     ```
+
+    Helpful tools for sending HEC messages:
+    * [tools/HEC-JSON-Sender.py] - Send JSON file as event
 
 ### Splunk Management API - 8089
 
