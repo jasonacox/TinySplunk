@@ -37,7 +37,6 @@ http://localhost:8000/en-US/app/launcher/home
 
 If you didn't edit the `setup.sh` script the password will be _TinyPassword_. You should change it.
 
-
 ## Details
 
 The `setup.sh` script pulls down the latest splunk container from docker hub.  
@@ -47,13 +46,12 @@ The `setup.sh` script pulls down the latest splunk container from docker hub.
     - /home/splunk/var (host) maps to /opt/splunk/var (container)
     - /home/splunk/etc (host) maps to /opt/splunk/etc (container)
 
-* The script set up port forwarding for the following:
+* The script sets up port forwarding for the following:
 
     - 8000 - Main web portal UI
     - 8088 - HTTP Event Collector (HEC) 
     - 8089 - Splunk management port (REST API)
     - 9997 - Indexing receiver endpoint (used by external Universal Forwarders to send data)
-
 
 ## Tools
 
@@ -64,7 +62,7 @@ The following commands are included in this repo:
 * **logs** - This will display the logs from the container
 * **upgrade** - This will upgrade the container
 
-## Get Data 
+## Get Data
 
 Now that Splunk is running, you want to see some data, right?  There are several ways to get data into Splunk.  We will walk through a few of them here:
 
@@ -80,8 +78,8 @@ Now that Splunk is running, you want to see some data, right?  There are several
     * Details coming soon
     * Examples coming soon
 
-
 ## References
+
 * https://www.splunk.com/
 * https://github.com/georgestarcher/Splunk-Class-httpevent/blob/master/splunk_http_event_collector.py
 * https://github.com/jonromero/pyHEC
