@@ -20,10 +20,10 @@ sudo usermod -aG docker splunk
 
 echo "Installing TinySplunk tools as splunk user.."
 # Switch to splunk user
-sudo su -u splunk "git clone https://github.com/jasonacox/TinySplunk.git"
+sudo -u splunk "git clone https://github.com/jasonacox/TinySplunk.git"
 
 echo "Setting up Splunk docker container..."
 # Run Setup to install and configure containerized splunk
-sudo su -u splunk "cd ~; /home/slunk/setup.sh"
+sudo -u splunk "cd ~; /home/slunk/setup.sh"
 
 echo "Done."
