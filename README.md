@@ -50,10 +50,10 @@ The `setup.sh` script pulls down the latest splunk container from docker hub.
 
 * The script sets up port forwarding for the following:
 
-    - 514 - Syslog port used for system logging (e.g. servers, network devices)
     - 8000 - Main web portal UI
     - 8088 - HTTP Event Collector (HEC) 
     - 8089 - Splunk management port (REST API)
+    - 8514 - Syslog port (514) used for system logging (e.g. servers, network devices)
     - 9997 - Indexing receiver endpoint (used by external Universal Forwarders to send data)
 
 ## Tools
