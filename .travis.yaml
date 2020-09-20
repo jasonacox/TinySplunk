@@ -1,0 +1,6 @@
+language: python
+os: linux
+services:
+    - docker
+script:
+    - bash configure.sh
