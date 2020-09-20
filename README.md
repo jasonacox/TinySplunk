@@ -44,8 +44,8 @@ The `setup.sh` script pulls down the latest splunk container from docker hub.
 
 * The script will mount the *var* and *etc* folder to local directories to allow configuration and data persistence.
 
-    - /home/splunk/var (external) maps to /opt/splunk/var (container)
-    - /home/splunk/etc (external) maps to /opt/splunk/etc (container)
+    - /home/splunk/var (host) maps to /opt/splunk/var (container)
+    - /home/splunk/etc (host) maps to /opt/splunk/etc (container)
 
 * The script set up port forwarding for the following:
 
