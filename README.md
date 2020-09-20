@@ -10,7 +10,7 @@ This setup assumes a Linux host with docker installed.
 
 ```bash
 # Create splunk user and home directory
-sudo useradd -m username
+sudo useradd -m splunk
 
 # Add splunk user to docker group
 sudo usermod -aG docker splunk
