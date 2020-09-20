@@ -4,7 +4,7 @@ TinySplunk is a collection of tools to build and use a Docker containerized vers
 
 ## Example - Weather Station Data
 
-I created a solar powered  WiFi weather station that sends temperate, pressure, humidity and other data. I packaged this data into a JSON payload and send it with [HEC-JSON-Sender.py](../tools/HEC-JSON-Sender.py) to Splunk.  
+I created a solar powered [WiFi Weather Station](https://github.com/jasonacox/WeatherStationWiFi) that sends temperate, pressure, humidity and other data. I packaged this data into a JSON payload and send it with [HEC-JSON-Sender.py](../tools/HEC-JSON-Sender.py) to Splunk.  
 
 ```json
 {"pressure": 966.44, "voltage": 4.23, "wind": 47.0, "temp": 36.4, "sensor": "102", "rain": "0", "humidity": 5.32}
@@ -20,6 +20,5 @@ ourcetype=weather_station
 
 ### Splunk Dashboard
 
-![Search Query](example-splunk-search.png)
 ![Dashboard](example-splunk-dashboard.png)
 
