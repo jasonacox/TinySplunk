@@ -184,7 +184,7 @@ The following files and locations are key for configuring your forwarder. Spunk 
 
     ```markdown
     [default]
-    host = sentrypi
+    host = rpi
     [script:///home/splunk/bin/scripts/cpu.sh]
     index = main
     interval = 300
@@ -206,12 +206,12 @@ The following files and locations are key for configuring your forwarder. Spunk 
 
 * ./var/log/splunk/splund.log - Log file to watch to troubleshoot setup
 
-After making changes, restart the Splunk forwarder:
+Make sure you restart the Splunk forwarder to pick up any changes:
 
-    ```bash
-    # Start the forwarder
-    $SPLUNK_HOME/bin/splunk restart
-    ```
+```bash
+# Start the forwarder
+$SPLUNK_HOME/bin/splunk restart
+```
 
 Note: when installing the Universal Forwarder on Linux or the Raspberry Pi please note the default install does NOT autorun on boot. You can set it to autostart with: `sudo $SPLUNK_HOME/bin/Splunk enable boot-start`
 
