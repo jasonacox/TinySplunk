@@ -24,7 +24,7 @@ docker run \
 splunk/splunk:latest
 
 echo "Waiting for Splunk to start..."
-sleep 15
+sleep 60
 docker logs splunk
 
 echo "Done."
