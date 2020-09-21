@@ -19,8 +19,8 @@ docker run \
 --name splunk \
 --restart unless-stopped \
 -e TZ="America/Los_Angeles" \
--v $HOME/var:/opt/splunk/var \
--v $HOME/etc:/opt/splunk/etc \
+-v $PWD/var:/opt/splunk/var \
+-v $PWD/etc:/opt/splunk/etc \
 splunk/splunk:latest
 
 echo "Waiting for Splunk to start..."

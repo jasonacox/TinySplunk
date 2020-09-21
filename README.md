@@ -12,6 +12,25 @@ I created this repo to chronicle my journey in setting up a home-based Tiny Splu
 
 This setup assumes you are using a Linux host with docker installed.  
 
+### Quick Start
+
+Log in to your Linux host and run `setup.sh` to install and get Splunk running.
+
+```bash
+# Pull down TinySplunk utilities
+git clone https://github.com/jasonacox/TinySplunk.git
+
+# Edit the setup.sh to set the admin password for Splunk
+nano setup.sh
+
+# Run Setup to install and configure containerized splunk
+./setup.sh
+```
+
+### Long Version
+
+If you want to run the Splunk container under a different user (e.g. splunk) use the following steps:
+
 ```bash
 # Create splunk user and home directory
 sudo useradd -m splunk
@@ -29,15 +48,15 @@ git clone https://github.com/jasonacox/TinySplunk.git
 cat bashrc >> .bashrc
 source bashrc
 
-# Edit the setup.sh for your specific requirements
-vim setup.sh
+# Edit the setup.sh to set the admin password for Splunk
+nano setup.sh
 
 # Run Setup to install and configure containerized splunk
 ./setup.sh
 ```
 
-Once this completes, Splunk will be installed and running on the host: 
-http://localhost:8000/en-US/app/launcher/home
+Once this completes, Splunk will be installed and running on the host at: 
+http://localhost:8000/
 
 If you didn't edit the `setup.sh` script the password will be _TinyPassword_. You should change it.
 
