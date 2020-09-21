@@ -3,7 +3,7 @@
 # Setup for Splunk Server
 #
 
-# Edit the password, TZ timezone and /home/splunk
+# Edit the password and TZ timezone settings
 
 echo "Start Splunk Server for first time - running..."
 
@@ -19,8 +19,8 @@ docker run \
 --name splunk \
 --restart unless-stopped \
 -e TZ="America/Los_Angeles" \
--v /home/splunk/var:/opt/splunk/var \
--v /home/splunk/etc:/opt/splunk/etc \
+-v $HOME/var:/opt/splunk/var \
+-v $HOME/etc:/opt/splunk/etc \
 splunk/splunk:latest
 
 echo "Done."
