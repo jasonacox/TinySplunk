@@ -90,13 +90,6 @@ The following commands are included in this repo:
 
 Now that Splunk is running, you want to see some data, right?  There are several ways to get data into Splunk.  We will walk through a few of them here:
 
-### Universal Forwarder - 9997
-
-If you want to send data or log files over from another systems, the Universal Forward is a good way to do that.  There are binaries available for most operating systems, including the ARM processor powered Raspberry Pi!
-
-* Details coming soon
-* Examples coming soon
-
 ### HTTP Event Collector (HEC) - 8088
 
 You can send data to Splunk via simple HTTP post commands.  This requires that you set up a Splunk HEC token for your scripts to use: 
@@ -153,6 +146,75 @@ You can send data to Splunk via simple HTTP post commands.  This requires that y
     Helpful tools for sending HEC messages:
     * [HEC-JSON-Sender.py](tools/HEC-JSON-Sender.py) - Send JSON file as event
 
+### Universal Forwarder - 9997
+
+If you want to send data or log files over from another systems, the Universal Forwarder is a good way to do that.  There are binaries available for most operating systems, including the ARM processor powered Raspberry Pi!
+
+* Locate, download and install the Universal Forwarder for your platform. You will need to register and sign in: <https://www.splunk.com/en_us/download/universal-forwarder.html>
+
+```bash
+# Set up whatever user/directory you want for the forwarder
+cd /home/splunk
+
+# Set the SPLUNK Home as current directory
+export SPLUNK_HOME=$PWD
+
+# Untar the contents of the forwarder - this is an example
+tar -zxvf splunkforwarder-8.0.6-152fb4b2bb96-Linux-arm.tgz 
+
+# Start the forwarder
+$SPLUNK_HOME/bin/splunk start
+```
+
+The following files and locations are key for configuring your forwarder. Spunk docs on configuring the Forwarder are [here](https://docs.splunk.com/Documentation/Forwarder/8.0.6/Forwarder/Configuretheuniversalforwarder). All of these are in reference to the $SPLUNK_HOME directory where you installed the files.
+
+* ./bin/scripts/ - This is where you place custom scripts to send data.  Here is an example script that gathers local CPU data to Splunk (cpu.sh):
+
+    ```bash
+    #! /bin/sh
+    TIME=$(date +"%D %T.%3N %Z")
+    TEMP=$(vcgencmd measure_temp)
+    VOLTS=$(vcgencmd measure_volts)
+    CPU_TEMP=`echo $TEMP | cut -d \' -f 1`
+    VOLTS=`echo $VOLTS | cut -d V -f 1`
+    echo "time=$TIME|$VOLTS|$CPU_TEMP"
+    ```
+
+* ./etc/system/local/inputs.conf - This is where you define the source for the data to send. Here is an example that runs the above script every 300s:
+
+    ```markdown
+    [default]
+    host = sentrypi
+    [script:///home/splunk/bin/scripts/cpu.sh]
+    index = main
+    interval = 300
+    source = test
+    sourcetype = cpu_data 
+    ```
+
+* ./etc/apps/SplunkUniversalForwarder/default/outputs.conf - This is where you define the Splunk server details:
+
+    ```bash
+    #   Version 8.0.6
+    [tcpout]
+    ...
+    # Add the following lines for your Splunk server
+    defaultGroup=my_indexers
+    [tcpout:my_indexers]
+    server=XX.XXX.XX.XXX:9997
+    ```
+
+* ./var/log/splunk/splund.log - Log file to watch to troubleshoot setup
+
+After making changes, restart the Splunk forwarder:
+
+    ```bash
+    # Start the forwarder
+    $SPLUNK_HOME/bin/splunk restart
+    ```
+
+Note: when installing the Universal Forwarder on Linux or the Raspberry Pi please note the default install does NOT autorun on boot. You can set it to autostart with: `sudo $SPLUNK_HOME/bin/Splunk enable boot-start`
+
 ### Splunk Management API - 8089
 
 You can even send data to Splunk through the port 8089 REST API via Splunk SDKs.  Note, this only works on the full Splunk Enterprise version (Trial or Licensed) with User and Authentication features enabled.  This is not available in the Splunk Free version.
@@ -194,11 +256,11 @@ You can even send data to Splunk through the port 8089 REST API via Splunk SDKs.
 
 ## References
 
-* https://www.splunk.com/
-* https://github.com/georgestarcher/Splunk-Class-httpevent/blob/master/splunk_http_event_collector.py
-* https://github.com/jonromero/pyHEC
-* https://github.com/georgestarcher/Splunk-Class-httpevent
-* Switch to Free License: https://community.splunk.com/t5/Installation/How-do-I-get-a-free-license/m-p/9196
+* Splunk, Inc. Homepage: https://www.splunk.com/
+* pyHEC Python Module: https://github.com/jonromero/pyHEC
+* Splunk-HEC Python Module: https://github.com/georgestarcher/Splunk-Class-httpevent
+* Universal Forwarder on Raspberry Pi: http://devops.pm/archives/287/splunk-universal-forwarder-on-raspberry-pi-3-and-splunk-enterprise-on-labtop/
+* How to switch to Free License: https://community.splunk.com/t5/Installation/How-do-I-get-a-free-license/m-p/9196
 
 ## Notice
 
