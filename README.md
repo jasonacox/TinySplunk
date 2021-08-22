@@ -1,12 +1,12 @@
 # TinySplunk
 
-[![Build Status](https://travis-ci.org/jasonacox/TinySplunk.svg?branch=master)](https://travis-ci.org/jasonacox/TinySplunk)
+[![Build Status](https://app.travis-ci.com/jasonacox/TinySplunk.svg?branch=master)](https://app.travis-ci.com/jasonacox/TinySplunk)
 
 TinySplunk is a collection of tools and instructions to build and use a Docker containerized version of Splunk for home and educational use.
 
 What is Splunk? [Splunk](https://www.splunk.com) is a commercial software tool that provides a web-based way to search, monitor and analyze log and event data from computer systems and network devices.  It is a commercial product but they offer a [Splunk Free](https://www.splunk.com/en_us/download.html) version for personal use. The Splunk Free version supports indexing of small volumes (up to 500MB/day).  
 
-I created this repo to chronicle my journey in setting up a home-based Tiny Splunk (free) installation for education and home automation.  I'm including tips, instructions and tools I have found or built along the way. I welcome comments (issues) and pull requests!
+I created this repo to chronicle my journey in setting up a home-based tiny Splunk (free) installation for education and home automation.  I'm including tips, instructions and tools I have found or built along the way. I welcome comments (issues) and pull requests!
 
 ## Setup
 
